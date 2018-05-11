@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,11 +45,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void onSearch(View view) {
 
-        EditText location_search = (EditText) findViewById(R.id.searchText);
+        EditText location_search = findViewById(R.id.searchText);
         String location = location_search.getText().toString();
         List<Address> addressList = null;
 
-        if (location != null || !location.equals("")) {
+        if (location == null && addressList.size() > 0) {
             Geocoder geocoder = new Geocoder(this);
             try {
                 addressList = geocoder.getFromLocationName(location, 1);
@@ -60,6 +61,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
             mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        } else {
+            Toast.makeText(this, getString(R.string.incorrect_address), Toast.LENGTH_LONG).show();
         }
+
     }
-}
+
+    }
+
+
+

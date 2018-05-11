@@ -2,4 +2,5 @@
     <string name="app_name">Google_Maps</string>
     <string name="title_activity_maps">Map</string>
     <string name="button_search_name">SEARCH</string>
+    <string name="incorrect_address">Enter a valid address or location</string>
 </resources>
